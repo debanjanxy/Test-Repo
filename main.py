@@ -1,16 +1,19 @@
 #!usr/bin/python
+import webbrowser
+import requests
+import sys
+import re
 
-if __name__=='main':
-    #login to moodle
-
-    #go to the specified course page
-
-    #get all the links in the page
-
-    #go to every link and find "submission file" part in the urls present in
-    #that page.
-
-    #Get the all such inner level urls and download all the files in a
-    #specified folder.
-
-    #
+#It performs log-in into the moodle
+def moodle_login(username,password):
+    session = requests.session()
+    url = "http://moodle.iitb.ac.in/login/index.php"
+    values = {'username':username,
+         'password':password}
+    res = session.post(url,data=values)
+    if res.status_code!=200:
+        print("Error in login")
+        return 0
+    else:
+        print("Login successful")
+        return 1
